@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getFilter } from 'redux/selectors';
-import { filterContacts } from 'redux/phonebookSlice';
+import { selectFilter } from 'redux/selectors';
+import { filteredContacts } from 'redux/filtersSlice';
 import { Wrapper, Label, Input } from './Filter.styled';
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const filterValue = useSelector(getFilter);
+  const filterValue = useSelector(selectFilter);
 
-  const onChangeFilter = ({ currentTarget: { value } }) => {
-    dispatch(filterContacts(value));
+  const onChangeFilter = ({ target: { value } }) => {
+    dispatch(filteredContacts(value.toLowerCase()));
   };
 
   return (

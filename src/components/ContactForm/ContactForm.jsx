@@ -1,17 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Notiflix from 'notiflix';
 
-import { addContacts } from 'redux/phonebookSlice';
-import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
+import { selectContacts } from 'redux/selectors';
 import { Form, Label, Input, Button } from './ContactForm.styled';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const onFormSubmit = e => {
     e.preventDefault();
-    const { name, number } = e.currentTarget.elements;
+    const { name, phone } = e.currentTarget.elements;
 
     if (onDuplicateCheck(name.value)) {
       Notiflix.Notify.failure(`${name.value} is already in contacts`);
@@ -20,7 +20,7 @@ const ContactForm = () => {
       return;
     }
 
-    dispatch(addContacts(name.value, number.value));
+    dispatch(addContact(name.value, phone.value));
 
     e.currentTarget.reset();
   };
@@ -45,12 +45,12 @@ const ContactForm = () => {
         />
       </Label>
 
-      <Label htmlFor="number">
+      <Label htmlFor="phone">
         Number
         <Input
           type="tel"
-          name="number"
-          id="number"
+          name="phone"
+          id="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
