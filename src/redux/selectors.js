@@ -9,9 +9,6 @@ export const selectFilter = state => state.filter;
 export const selectVisibleContacts = createSelector(
   [selectContacts, selectFilter],
   (contacts, filterValue) => {
-    console.log('contacts: ', contacts);
-    console.log('value: ', filterValue);
-
     return contacts
       .filter(contact => contact.name.toLowerCase().includes(filterValue))
       .sort((a, b) => a.name.localeCompare(b.name));

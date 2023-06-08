@@ -1,17 +1,24 @@
-import { FallingLines } from 'react-loader-spinner';
+import { RotatingLines } from 'react-loader-spinner';
+import PropTypes from 'prop-types';
+
 import { Wrapper } from './Loader.styled';
 
-const Loader = () => {
+const Loader = ({ width = '40' }) => {
   return (
     <Wrapper>
-      <FallingLines
-        color="#ef8354"
-        width="100"
+      <RotatingLines
+        strokeColor="grey"
+        strokeWidth="5"
+        animationDuration="0.75"
+        width={width}
         visible={true}
-        ariaLabel="falling-lines-loading"
       />
     </Wrapper>
   );
+};
+
+Loader.propTypes = {
+  width: PropTypes.string,
 };
 
 export default Loader;

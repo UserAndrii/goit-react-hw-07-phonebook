@@ -4,7 +4,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 320px;
-  padding: 20px 10px;
+  padding: 20px 20px;
   margin-bottom: 30px;
   border: 1px solid rgb(191, 192, 192);
 `;
@@ -47,6 +47,9 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
+  display: flex;
+  align-items: center;
+
   position: relative;
   overflow: hidden;
   font-weight: 600;
@@ -56,7 +59,7 @@ export const Button = styled.button`
   letter-spacing: 0.06em;
   text-transform: capitalize;
   cursor: pointer;
-  width: 150px;
+  max-width: 180px;
   padding: 10px;
   color: #bfc0c0;
   background-color: inherit;

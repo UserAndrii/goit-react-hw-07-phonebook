@@ -1,28 +1,38 @@
 import { useSelector, useDispatch } from 'react-redux';
-import Notiflix from 'notiflix';
+import { toast } from 'react-hot-toast';
 
 import { addContact } from 'redux/operations';
 import { selectContacts } from 'redux/selectors';
 import { Form, Label, Input, Button } from './ContactForm.styled';
 
+// import {
+//   useAddContactMutation,
+//   useFetchContactsQuery,
+// } from 'redux/contactsServiceApi';
+// import Loader from '../Loader';
+
 const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+
+  // const [addContact, { isLoading: additionContact }] = useAddContactMutation();
+  // const { data: contacts } = useFetchContactsQuery();
 
   const onFormSubmit = e => {
     e.preventDefault();
     const { name, phone } = e.currentTarget.elements;
 
     if (onDuplicateCheck(name.value)) {
-      Notiflix.Notify.failure(`${name.value} is already in contacts`);
+      toast.error(`${name.value} is already in contacts`);
       e.currentTarget.reset();
       name.focus();
       return;
     }
 
-    dispatch(addContact(name.value, phone.value));
+    dispatch(addContact({ name: name.value, phone: phone.value }));
+    // addContact({ name: name.value, phone: phone.value });
 
-    e.currentTarget.reset();
+    e.currentTarget.reset(name.value, phone.value);
   };
 
   const onDuplicateCheck = name => {
@@ -57,7 +67,10 @@ const ContactForm = () => {
         />
       </Label>
 
-      <Button type="submit">Add contact</Button>
+      <Button type="submit">
+        Add contact
+        {/* {additionContact && <Loader width={'20'} />} */}
+      </Button>
     </Form>
   );
 };
